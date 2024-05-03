@@ -1,3 +1,7 @@
+.dashboard-wrapper {
+  position: relative; /* Set position to relative */
+}
+
 .top-container-dashboard {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -19,7 +23,94 @@
 }
 
 .stats img {
-  width:400px;
-  height:300px;
+  width: 400px;
+  height: 300px;
   border-radius: 50px;
 }
+.stats button {
+  background-color: #c2e299;
+  padding: 6px 6px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-weight: 700;
+  width: 100%;
+}
+.stats button:hover {
+  background-color: #67b206;
+}
+
+.stats p {
+  font-weight: 700;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  z-index: 1000;
+  width: 50%; /* Adjust the width as needed */
+  max-width: 500px; /* Limit the maximum width */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease-in-out;
+  height: fit-content;
+}
+
+.modal.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal h2 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.modal label {
+  display: block;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  font-weight: 500;
+}
+
+.modal span {
+  cursor: pointer;
+}
+
+.modal select {
+  padding: 5px 5px;
+  border: 1px solid black;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.modal input {
+  width: calc(100% - 40px);
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.modal button {
+  background-color: #c2e299;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.modal button:hover {
+  background-color: #67b206;
+}
+

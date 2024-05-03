@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const userRoutes = require('./routes/users');
 const transactionRoutes = require('./routes/transactions');
+const financialGoalsRoutes = require('./routes/financial-goals');
 const path = require('path');
 require('./config/db-connection.js');
 
@@ -19,6 +20,7 @@ app.use(bodyParser.json());
 // Routes
 app.use('/api/users', userRoutes);
 app.use('/api/transactions', transactionRoutes);
+app.use('/api/financial-goals', financialGoalsRoutes);
 
 // Serve React app for all other routes
 app.get('*', (req, res) => {

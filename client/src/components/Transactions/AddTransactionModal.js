@@ -8,6 +8,12 @@ const AddTransactionModal = ({ type, onClose }) => {
   const [category, setCategory] = useState('');
   const [message, setMessage] = useState(null);
   const { currentUser } = useContext(AuthContext);
+  const [isModalOpen, setIsModalOpen] = useState(true);
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    onClose();
+  };
 
   const handleSave = async () => {
     try {
@@ -48,7 +54,8 @@ const AddTransactionModal = ({ type, onClose }) => {
   };
 
   return (
-    <div className="modal">
+    <div className={`modal ${isModalOpen ? 'open' : ''}`}>
+      <span className="close" onClick={handleCloseModal}>&times;</span>
       <h2>{type === 'income' ? 'Add Income' : 'Add Expense'}</h2>
       <label>Name:</label>
       <input
@@ -102,7 +109,6 @@ const AddTransactionModal = ({ type, onClose }) => {
       {message && <p>{message}</p>}
       <div>
         <button onClick={handleSave}>Save</button>
-        <button onClick={onClose}>Cancel</button>
       </div>
     </div>
   );

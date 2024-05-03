@@ -44,7 +44,7 @@ const AllTransactions = ({ allTransactions, onDelete, onEdit }) => {
     <div className='all-transactions-container'>
       <h2>All Transactions</h2>
       <div className="search-sort">
-        <label className='searchbar'>Search:</label>
+        <label>Search:</label>
         <input
           type="text"
           value={searchTerm}

@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
 import 'chartjs-plugin-datalabels';
-import './IncomeExpenseSource.css'; // Import CSS file for custom styles
 
 const IncomeExpenseSource = ({ type, categories }) => {
   const chartRef = useRef(null);
@@ -55,13 +54,15 @@ const IncomeExpenseSource = ({ type, categories }) => {
               }
             },
             datalabels: {
+              display: true,
               color: 'black',
               anchor: 'end',
               align: 'end',
               formatter: function(value, context) {
                 const label = context.chart.data.labels[context.dataIndex];
                 const total = context.chart.data.datasets[0].data[context.dataIndex];
-                return label + ': $' + value.toFixed(2) + ' (Total: $' + total.toFixed(2) + ')';
+                const percentage = ((value / total) * 100).toFixed(2) + '%';
+                return label + ': $' + value.toFixed(2) + ' (' + percentage + ')';
               }
             }
           }

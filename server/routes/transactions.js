@@ -44,7 +44,6 @@ router.get('/:userId', async (req, res) => {
 
     for (const transaction of allTransactions) {
       if (transaction.type === 'income') {
-        console.log(runningTotalIncome, "runningTotalIncome")
         runningTotalIncome += parseInt(transaction.amount);
       } else {
         runningTotalExpense += parseInt(transaction.amount);

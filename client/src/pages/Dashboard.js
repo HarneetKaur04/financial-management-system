@@ -27,7 +27,7 @@ function Dashboard() {
     if (currentUser) {
       fetchTransactions();
     }
-  }, [isModalOpen]);
+  }, [currentUser, isModalOpen]);
 
   const fetchTransactions = async () => {
     fetch(`http://localhost:7000/api/transactions/${currentUser.uid}`)
@@ -97,7 +97,7 @@ function Dashboard() {
   };
 
   return (
-    <div className="top-container-dashboard">
+    <div className={`top-container-dashboard ${isModalOpen ? 'modal-open' : ''}`}>
       <div className="card">
         <Savings totalSavings={totalSavings} />
       </div>
