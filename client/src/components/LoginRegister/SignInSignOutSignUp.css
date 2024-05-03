@@ -1,0 +1,34 @@
+.btn-sign-in-up {
+  background-color: #c2e299;
+  padding: 6px 6px;
+  border-radius: 5px;
+}
+
+.btn-sign-in-up:hover {
+  background-color: #67b206;
+  cursor: pointer;
+}
+
+.btn-sign-out {
+  padding: 6px 6px;
+  border-radius: 5px;
+  margin-top: 15px;
+  font-weight: 700;
+  border:none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.btn-sign-out:hover {
+  background-color: #67b206;
+}
+
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}

@@ -1,0 +1,25 @@
+.top-container-dashboard {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 20px;
+  background-color: #f3f8f4;
+}
+
+.card {
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: white;
+}
+
+.transaction-container {
+  grid-column: 1 / -1;
+  background-color: white;
+}
+
+.stats img {
+  width:400px;
+  height:300px;
+  border-radius: 50px;
+}

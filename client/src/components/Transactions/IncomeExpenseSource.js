@@ -1,0 +1,81 @@
+import React, { useEffect, useRef } from 'react';
+import Chart from 'chart.js/auto';
+import 'chartjs-plugin-datalabels';
+import './IncomeExpenseSource.css'; // Import CSS file for custom styles
+
+const IncomeExpenseSource = ({ type, categories }) => {
+  const chartRef = useRef(null);
+  const chartInstance = useRef(null);
+
+  useEffect(() => {
+    if (categories && categories.length > 0) {
+      const labels = categories.map(category => category.category);
+      const data = categories.map(category => parseFloat(category.total)); // Convert total to float
+
+      const ctx = chartRef.current.getContext('2d');
+
+      // Check if there's an existing chart instance and destroy it
+      if (chartInstance.current) {
+        chartInstance.current.destroy();
+      }
+
+      chartInstance.current = new Chart(ctx, {
+        type: type === 'income' ? 'bar' : 'pie',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Amount',
+            data: data,
+            backgroundColor: [
+              'rgb(221, 117, 117)',
+              'rgb(117, 126, 221)',
+              'rgb(218, 221, 117)',
+              'rgb(184, 221, 166)',
+              'rgb(221, 117, 218)',
+              'rgb(227, 166, 112)',
+              'rgb(131, 223, 206)',
+              'rgb(111, 94, 194)',
+            ]
+          }]
+        },
+        options: {
+          responsive: false,
+          plugins: {
+            legend: {
+              display: type === 'income' ? false : true,
+              position: type === 'income' ? 'bottom' : 'right'
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  const label = context.label || '';
+                  const value = typeof context.raw === 'number' ? context.raw : 0;
+                  return label + ': $' + (parseFloat(value).toFixed(2));
+                }
+              }
+            },
+            datalabels: {
+              color: 'black',
+              anchor: 'end',
+              align: 'end',
+              formatter: function(value, context) {
+                const label = context.chart.data.labels[context.dataIndex];
+                const total = context.chart.data.datasets[0].data[context.dataIndex];
+                return label + ': $' + value.toFixed(2) + ' (Total: $' + total.toFixed(2) + ')';
+              }
+            }
+          }
+        }
+      });
+    }
+  }, [categories, type]);
+
+  return (
+    <div className='sources'>
+      <h2>{type === 'income' ? 'Income Sources' : 'Spending Habits'}</h2>
+      <canvas className="chart-canvas" ref={chartRef}></canvas>
+    </div>
+  );
+};
+
+export default IncomeExpenseSource;
