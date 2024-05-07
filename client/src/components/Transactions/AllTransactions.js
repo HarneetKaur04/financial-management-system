@@ -44,14 +44,15 @@ const AllTransactions = ({ allTransactions, onDelete, onEdit }) => {
     <div className='all-transactions-container'>
       <h2>All Transactions</h2>
       <div className="search-sort">
-        <label>Search:</label>
+        <label htmlFor="search-input">Search:</label>
         <input
+          id="search-input"
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <label>Sort By:</label>
-        <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+        <label htmlFor="sort-select">Sort By:</label>
+        <select id="sort-select" value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
           <option value="">Select</option>
           <option value="date">Date (Most Recent)</option>
           <option value="type">Transaction Type</option>
