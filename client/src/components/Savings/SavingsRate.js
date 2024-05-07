@@ -2,7 +2,7 @@ import React from 'react';
 import { Line } from 'react-chartjs-2';
 import 'chartjs-adapter-date-fns'; //
 
-const SavingsRate = ({ savingsRateData }) => {
+const SavingsRate = ({ savingsRateData, handleViewFullReport }) => {
   // Convert savings_rate values to numbers
   const data = savingsRateData.map(entry => ({
     date: new Date(entry.date), //
@@ -45,9 +45,10 @@ const SavingsRate = ({ savingsRateData }) => {
   };
 
   return (
-    <div>
+    <div className='stats'>
       <h2>Savings Rate</h2>
       <Line data={chartData} options={options} />
+      <button onClick={handleViewFullReport}>See Full Report</button>
     </div>
   );
 };

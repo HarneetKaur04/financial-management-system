@@ -10,14 +10,14 @@ router.post('/signup', async (req, res) => {
     const { email, uid } = req.body;
 
     // Check if the user already exists in the database
-    const existingUser = await db.oneOrNone('SELECT * FROM users WHERE id = $1', [uid]);
+    const existingUser = await db.oneOrNone('SELECT * FROM users WHERE user_id = $1', [uid]);
     if (existingUser) {
       // If user already exists, send a response indicating that
       return res.status(201).json({ message: 'User already exists' });
     }
 
     // Insert user data into the database
-    await db.none('INSERT INTO users (email, id) VALUES ($1, $2)', [email, uid]);
+    await db.none('INSERT INTO users (email, user_id) VALUES ($1, $2)', [email, uid]);
 
     // Send a success response
     res.status(201).json({ message: 'User entry created successfully' });

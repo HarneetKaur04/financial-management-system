@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
 import 'chartjs-plugin-datalabels';
 
-const IncomeExpenseSource = ({ type, categories }) => {
+const IncomeExpenseSource = ({ type, categories, handleSourcesReport, onButtonClick}) => {
   const chartRef = useRef(null);
   const chartInstance = useRef(null);
 
@@ -72,9 +72,10 @@ const IncomeExpenseSource = ({ type, categories }) => {
   }, [categories, type]);
 
   return (
-    <div className='sources'>
+    <div className='stats'>
       <h2>{type === 'income' ? 'Income Sources' : 'Spending Habits'}</h2>
-      <canvas className="chart-canvas" ref={chartRef}></canvas>
+      <canvas className={type === 'income' ? "chart-canvas" : "chart-canvas-pie"} ref={chartRef}></canvas>
+      <button onClick={() => onButtonClick(type)}>See Full Report</button>
     </div>
   );
 };

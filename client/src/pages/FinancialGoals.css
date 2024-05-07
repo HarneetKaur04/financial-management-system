@@ -1,8 +1,6 @@
 .financial-goals-container {
   display: flex;
   flex-direction: column;
-  background-color: #f3f8f4;
-  height: 100vh;
 }
 
 .select-goals-container {
@@ -32,7 +30,14 @@
   cursor: pointer;
   width: 100px;
   height: 100px;
-  background-color: white;
+  background-color: #f3f8f4;
+}
+
+.goals-img {
+  background:cover;
+  width:50%;
+  height: 70%;
+  margin-left: 50px;
 }
 
 .overlay {
@@ -57,7 +62,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: white;
+  background-color: #f3f8f4;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -129,6 +134,11 @@
   margin-bottom: 20px;
 }
 
+.active-goals-container p {
+  font-size: 16px;
+  text-align: center;
+}
+
 .active-goal-card-container {
   display: flex;
   flex-wrap: wrap;
@@ -142,17 +152,17 @@
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  background-color: white;
+  background-color: #f3f8f4;
 }
 
 .financial-goal-card h3 {
   font-size: 18px;
   margin-bottom: 10px;
-  cursor: pointer;
 }
 
 .financial-goal-card p {
   margin-bottom: 10px;
+  text-align: left
 }
 
 .financial-goal-card progress {
@@ -197,7 +207,7 @@
   flex-direction: column;
   align-items: center;
   margin: 10px;
-  background-color: white;
+  background-color: #f3f8f4;
   border-radius: 50%; /* Adjust border radius as needed */
   padding: 20px; /* Adjust padding as needed */
 }

@@ -1,11 +1,19 @@
 import React, { useState, useEffect, useContext } from "react";
-import FinancialGoalCard from "../components/Goals/FinancialGoalCard";
 import AuthContext from "../AuthContext";
 import "./FinancialGoals.css"; // Import CSS file
+import { useNavigate } from "react-router-dom";
 import AchievedGoal from "../components/Goals/AchievedGoal";
+import ActiveGoal from "../components/Goals/ActiveGoal";
 
 function FinancialGoals() {
-  const [goals, setGoals] = useState([]);
+  const goals = [
+    {goal_name: "TAKE A VACATION", img: "/assets/vacation.gif"},
+    {goal_name: "SAVE FOR RETIREMENT", img: "/assets/retirement.jpg"},
+    {goal_name: "PAY OFF DEBT", img: "/assets/debt.webp"},
+    {goal_name: "BUY A HOUSE", img: "/assets/house.avif"},
+    {goal_name: "SAVE FOR EDUCATION", img: "/assets/education.webp"},
+    {goal_name: "BUY A CAR", img: "/assets/car.avif"}
+  ]
   const [activeGoals, setActiveGoals] = useState([]);
   const [achievedGoals, setAchievedGoals] = useState([]);
   const [newGoalName, setNewGoalName] = useState("");
@@ -14,6 +22,7 @@ function FinancialGoals() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isNewGoalModalOpen, setIsNewGoalModalOpen] = useState(false);
   const { currentUser } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const resetOptions = () => {
     setNewGoalName("");
@@ -29,7 +38,7 @@ function FinancialGoals() {
         },
         body: JSON.stringify({
           userId: currentUser.uid,
-          goalName: newGoalName,
+          goalName: newGoalName.toUpperCase(),
           targetAmount: newGoalAmount,
         }),
       });
@@ -49,7 +58,6 @@ function FinancialGoals() {
     try {
       const response = await fetch(`http://localhost:7000/api/financial-goals/${currentUser.uid}`);
       const data = await response.json();
-      setGoals(data);
       setActiveGoals(data.filter(item => !item.completion_status));
       setAchievedGoals(data.filter(item => item.completion_status));
     } catch (error) {
@@ -160,6 +168,10 @@ function FinancialGoals() {
     fetchGoals();
   }, [currentUser]);
 
+  if (!currentUser) {
+    navigate("/")
+  }
+
   return (
     <div className="financial-goals-container">
       <div className="select-goals-container">
@@ -181,11 +193,12 @@ function FinancialGoals() {
           />
           <button onClick={handleAddGoal}>Add Goal</button>
         </div>
-        <h2>Ready to set Goals for yourself? Take your pick</h2>
+        <h2>Empower your financial future by selecting your savings goals today. Your choices pave the way for a prosperous tomorrow.</h2>
         <div className="goals-container">
           {goals.map((goal, index) => (
             <div className="goal-card" key={index} onClick={() => handleSelectGoal(goal)}>
               <p>{goal.goal_name}</p>
+              <img className="goals-img" src={goal.img} alt="goals"/>
             </div>
           ))}
           <div
@@ -198,7 +211,7 @@ function FinancialGoals() {
               backgroundPosition: "center",
             }}
           >
-            <p>Add New Goal</p>
+            <p>ADD NEW GOAL</p>
           </div>
         </div>
         {selectedGoal && (
@@ -206,26 +219,28 @@ function FinancialGoals() {
             <span className="close" onClick={handleModalClose}>&times;</span>
             <h2>ASSIGN TARGET $</h2>
             <p>Goal: {selectedGoal.goal_name}</p>
+            <p>Input Amount $</p>
             <input
               type="number"
               value={newGoalAmount}
-              onChange={(e) => setNewGoalAmount(e.target.value)} />
+              onChange={(e) => setNewGoalAmount(e.target.value)}/>
             <button onClick={handleSetTargetAmount}>Add Goal</button>
           </div></>
         )}
       </div>
       <div className="active-goals-container">
         <h2>Active Goals</h2>
+        {activeGoals.length <=0 && <p>No active goals!</p>}
         <div className="active-goal-card-container">
           {activeGoals.map((goal, index) => (
-            <FinancialGoalCard
+            <ActiveGoal
               key={index}
-              goal_id={goal.goal_id}
               title={goal.goal_name}
+              goal_id={goal.goal_id}
               currentAmountSaved={goal.current_amount_saved}
               budget={goal.target_amount}
               onBudgetAssign={handleBudgetAssign}
-              onGoalAchieved={(goal_id, currentAmountSaved) => handleGoalAchieved(goal_id, currentAmountSaved)}
+              onGoalAchieved={(goalId, currentAmountSaved) => handleGoalAchieved(goalId, currentAmountSaved)}
               onDeleteGoal={() => handleDeleteGoal(goal.goal_id)}
             />
           ))}

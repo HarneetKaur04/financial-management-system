@@ -17,14 +17,25 @@
   background-color: white;
 }
 
+.financial-goals-container {
+  grid-column: 1 / -1;
+  background-color: white !important;
+}
+
 .transaction-container {
   grid-column: 1 / -1;
   background-color: white;
 }
 
+.stats {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Make sure the container fills the available height */
+}
+
 .stats img {
   width: 400px;
-  height: 300px;
+  height: 350px;
   border-radius: 50px;
 }
 .stats button {
@@ -36,9 +47,15 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   font-weight: 700;
   width: 100%;
+  margin-top: auto;
 }
 .stats button:hover {
   background-color: #67b206;
+}
+
+.add-goal {
+  width: fit-content !important;
+  margin-left: 60% !important;
 }
 
 .stats p {
@@ -50,7 +67,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: white;
+  background-color: #f3f8f4;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -84,6 +101,10 @@
   cursor: pointer;
 }
 
+.modal.open span {
+  cursor: pointer;
+}
+
 .modal select {
   padding: 5px 5px;
   border: 1px solid black;
@@ -112,5 +133,48 @@
 
 .modal button:hover {
   background-color: #67b206;
+}
+
+.add-goal-btn-card {
+  background-color: #c2e299;
+  padding: 8px 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+  font-weight: 500;
+  width: fit-content;
+}
+
+.add-goal-btn-card:hover {
+  background-color: #67b206;
+}
+
+.sources {
+  margin: auto auto;
+}
+
+.chart-canvas, .chart-canvas-pie{
+  width: fit-content;
+  margin: auto auto;
+}
+
+.chart-canvas {
+  margin-top: 100px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+th {
+  background-color: #f2f2f2;
+  text-align: left;
 }
 

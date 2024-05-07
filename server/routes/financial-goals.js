@@ -26,6 +26,14 @@ router.post("/", async (req, res) => {
             "INSERT INTO financial_goals (user_id, goal_name, target_amount, current_amount_saved, completion_status) VALUES ($1, $2, $3, $4, $5) RETURNING *",
             [userId, goalName, targetAmount, currentAmountSaved, completionStatus]
         );
+
+        // Extract the newly generated goal_id
+        const goalId = result[0].goal_id;
+
+        await db.query(
+            "INSERT INTO savings_allocation (user_id, goal_id, amount_allocated) VALUES ($1, $2, $3) RETURNING *",
+            [userId, goalId, currentAmountSaved]
+        );
         res.status(201).json(result);
     } catch (error) {
         console.error("Error adding financial goal:", error);
@@ -42,6 +50,9 @@ router.put("/:userId/:goalId", async (req, res) => {
             "UPDATE financial_goals SET current_amount_saved = $1, completion_status = $2 WHERE user_id = $3 and goal_id = $4 RETURNING *",
             [currentAmountSaved, completionStatus, userId, goalId]
         );
+        await db.query("INSERT INTO savings_allocation (user_id, goal_id, amount_allocated) VALUES ($1, $2, $3) RETURNING *",
+        [userId, goalId, currentAmountSaved])
+        
         res.status(200).json(result);
     } catch (error) {
         console.error("Error updating financial goal:", error);
@@ -53,6 +64,7 @@ router.delete("/:userId/:goalId", async (req, res) => {
     const { userId, goalId } = req.params;
     try {
       // Perform the delete operation on the database
+      await db.query("DELETE FROM savings_allocation WHERE user_id = $1 AND goal_id = $2", [userId, goalId]);
       await db.query("DELETE FROM financial_goals WHERE user_id = $1 AND goal_id = $2", [userId, goalId]);
       
       res.status(200).json({ message: "Goal deleted successfully" });

@@ -66,7 +66,7 @@ const AllTransactions = ({ allTransactions, onDelete, onEdit }) => {
             <th>Name</th>
             <th>Type</th>
             <th>Category</th>
-            <th>Amount</th>
+            <th>Amount ($)</th>
             <th>Edit</th>
             <th>Delete</th>
           </tr>
@@ -78,7 +78,7 @@ const AllTransactions = ({ allTransactions, onDelete, onEdit }) => {
               <td>{transaction.name}</td>
               <td>{transaction.type}</td>
               <td>{transaction.category}</td>
-              <td>{transaction.amount}</td>
+              <td>${transaction.amount}</td>
               <td>
                 <button className="edit-btn" onClick={() => handleEditClick(transaction)}>Edit</button>
               </td>

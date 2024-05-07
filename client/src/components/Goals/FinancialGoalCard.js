@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function FinancialGoalCard({ goal_id, title, currentAmountSaved, budget, onBudgetAssign, onGoalAchieved, onDeleteGoal }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newBudget, setNewBudget] = useState("");
-  const [progress, setProgress] = useState(0); // Progress towards goal
+  const [progress, setProgress] = useState((currentAmountSaved/budget)*100); // Progress towards goal
+  const navigate = useNavigate();
 
   const handleAssignBudget = () => {
     onBudgetAssign(title, newBudget);
@@ -30,15 +32,18 @@ function FinancialGoalCard({ goal_id, title, currentAmountSaved, budget, onBudge
   return (
     <div className="financial-goal-card">
       <h3 onClick={() => setIsModalOpen(true)}>{title}</h3>
-      <p>{budget ? `Budget: $${budget}` : "No budget assigned"}</p>
+      {!onGoalAchieved && <button onClick={() => navigate("/financial-goals")}>Details</button>}
+      {onGoalAchieved &&
+        <><p>{budget ? `Target: $${budget}` : "No target assigned"}</p><p>{budget && `Saved: $${currentAmountSaved}`}</p><p>{budget && `Remaining: $${budget - currentAmountSaved}`}</p></>
+      }
       {budget && (
         <>
-          <div>Progress towards goal: {progress}%</div>
+          <div>Progress: {progress.toFixed(2)}%</div>
           <progress value={progress} max="100"></progress>
-          <button onClick={handleGoalAchieved}>Mark as goal achieved</button>
+          {onGoalAchieved && <button onClick={handleGoalAchieved}>Mark as goal achieved</button>}
         </>
       )}
-      <button onClick={handleDelete}>Delete Goal</button>
+      {onDeleteGoal && <button onClick={handleDelete}>Delete Goal</button>}
       {isModalOpen && (
         <div className="modal">
           <h3>Assign Target</h3>
@@ -47,7 +52,7 @@ function FinancialGoalCard({ goal_id, title, currentAmountSaved, budget, onBudge
             value={newBudget}
             onChange={(e) => setNewBudget(e.target.value)}
           />
-          <button onClick={handleAssignBudget}>Assign Budget</button>
+          <button onClick={handleAssignBudget}>Assign Target</button>
           <button onClick={handleCloseModal}>Close</button>
         </div>
       )}

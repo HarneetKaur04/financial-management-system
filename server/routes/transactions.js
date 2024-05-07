@@ -32,6 +32,10 @@ router.get('/:userId', async (req, res) => {
     // Calculate total savings
     const totalSavings = totalIncome - totalExpense;
 
+    const allocatedSavings = await db.query(
+      "SELECT * FROM financial_goals WHERE user_id = $1", [userId]
+    );
+
     // Query to get all transactions
     const allTransactionsQuery = 'SELECT transaction_id, name, date, amount, type, category FROM transactions WHERE user_id = $1 ORDER BY date';
     const allTransactionsResult = await db.query(allTransactionsQuery, [userId]);
@@ -52,8 +56,25 @@ router.get('/:userId', async (req, res) => {
       const netSavings = runningTotalIncome - runningTotalExpense;
       const savingsRate = (netSavings / runningTotalIncome) * 100;
 
-      savingsRates.push({ date: transaction.date, savings_rate: savingsRate });
+      savingsRates.push({ date: transaction.date, savings_rate: savingsRate, transaction_report: allTransactions});
     }
+    //Query to get savings allocation for each goal
+      const savingsToGoals = `
+      SELECT 
+          sa.goal_id, 
+          sa.amount_allocated, 
+          sa.date_allocated, 
+          fg.goal_name
+      FROM 
+          savings_allocation sa
+      INNER JOIN 
+          financial_goals fg ON sa.goal_id = fg.goal_id
+      WHERE 
+          sa.user_id = $1
+      ORDER BY 
+          sa.goal_id, 
+          sa.date_allocated`;
+    const savingsToGoalsResult = await db.query(savingsToGoals, [userId]);
 
     // Return the results
     res.json({
@@ -62,7 +83,9 @@ router.get('/:userId', async (req, res) => {
       incomeSources,
       expenseSources,
       totalSavings,
+      allocatedSavings,
       allTransactions,
+      savingsToGoalsResult,
       savingsRates
     });
   } catch (error) {
@@ -96,7 +119,7 @@ router.put('/:userId/:transactionId', async (req, res) => {
   const { date, type, category, name, amount } = req.body;
 
   try {
-    const updatedTransaction = await db.query(
+    await db.query(
       'UPDATE transactions SET user_id = $1, date = $2, type = $3, category = $4, name = $5, amount = $6 WHERE transaction_id = $7 RETURNING *',
       [userId, date, type, category, name, amount, transactionId]
     );

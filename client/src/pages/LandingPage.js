@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import SignUp from "../components/LoginRegister/SignUp";
 import SignIn from "../components/LoginRegister/SignIn";
 import "./LandingPage.css";
+import AuthContext from "../AuthContext";
+import { useNavigate } from 'react-router-dom';
 
 function LandingPage() {
+  const { currentUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  if (currentUser) {
+    navigate("/dashboard")
+  }
+
   return (
     <div className="landing-container">
       <div className="landing-content">

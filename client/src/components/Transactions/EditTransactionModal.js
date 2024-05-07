@@ -2,13 +2,26 @@ import React, { useState } from 'react';
 
 const EditTransactionModal = ({ transaction, onUpdate, onDelete, onClose }) => {
   const [editedTransaction, setEditedTransaction] = useState({ ...transaction });
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setEditedTransaction({ ...editedTransaction, [name]: value });
+  
+    // Check if the type is being changed
+    if (name === "type") {
+      // Reset the category to an empty string
+      setEditedTransaction({ ...editedTransaction, [name]: value, category: "" });
+    } else {
+      setEditedTransaction({ ...editedTransaction, [name]: value });
+    }
   };
 
   const handleSave = async () => {
+    // Check if the selected option is "Select"
+    if (editedTransaction.category === "") {
+      setErrorMessage('Please select a category.');
+      return;
+    }
     try {
       // Call onUpdate function passed from parent component with the edited transaction
       await onUpdate(editedTransaction);
@@ -60,6 +73,7 @@ const EditTransactionModal = ({ transaction, onUpdate, onDelete, onClose }) => {
             value={editedTransaction.category}
             onChange={handleInputChange}
           >
+            <option value="">Select</option>
             {editedTransaction.type === 'income' ? (
               <>
                 <option value="salary">Salary</option>
@@ -85,6 +99,7 @@ const EditTransactionModal = ({ transaction, onUpdate, onDelete, onClose }) => {
           <input type="number" name="amount" value={editedTransaction.amount} onChange={handleInputChange} />
           <button type="button" onClick={handleSave}>Save</button>
           <button type="button" onClick={handleDelete}>Delete</button>
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
         </form>
       </div>
     </div>
