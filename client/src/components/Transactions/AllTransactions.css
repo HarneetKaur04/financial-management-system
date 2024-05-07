@@ -1,7 +1,7 @@
 .all-transactions-container {
-  margin-top: 20px;
-  margin-left: 20px;
-  margin-right: 20px;
+  margin: 20px 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 .all-transactions-container h2 {
@@ -10,12 +10,12 @@
 
 .search-sort {
   display: flex;
-  justify-content: space-between; /* Align items properly */
+  justify-content: space-between;
   margin-bottom: 10px;
-  height: 40px; /* Adjust height */
-  background-color: #c2e299; /* Add green background */
-  padding: 0 20px; /* Add padding */
-  border-radius: 8px; /* Rounded corners */
+  height: 40px;
+  background-color: #c2e299;
+  padding: 0 20px;
+  border-radius: 8px;
 }
 
 .search-sort label {

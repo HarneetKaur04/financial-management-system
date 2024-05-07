@@ -1,5 +1,5 @@
 .dashboard-wrapper {
-  position: relative; /* Set position to relative */
+  position: relative;
 }
 
 .top-container-dashboard {
@@ -17,6 +17,31 @@
   background-color: white;
 }
 
+@media screen and (max-width: 2800px) {
+  .top-container-dashboard {
+    grid-template-columns: repeat(auto-fit, minmax(700px, 1fr));
+  }
+}
+
+@media screen and (max-width: 2400px) {
+  .top-container-dashboard {
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .top-container-dashboard {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .top-container-dashboard {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adjust the minmax value as needed */
+  }
+}
+
+
 .financial-goals-container {
   grid-column: 1 / -1;
   background-color: white !important;
@@ -30,11 +55,15 @@
 .stats {
   display: flex;
   flex-direction: column;
-  height: 100%; /* Make sure the container fills the available height */
+  height: 100%;
+}
+
+.stats p {
+  text-align: center;
 }
 
 .stats img {
-  width: 400px;
+  width: 90%;
   height: 350px;
   border-radius: 50px;
 }
@@ -72,8 +101,8 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   z-index: 1000;
-  width: 50%; /* Adjust the width as needed */
-  max-width: 500px; /* Limit the maximum width */
+  width: 50%;
+  max-width: 500px;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease-in-out;

@@ -9,23 +9,23 @@
   justify-content: space-between;
   align-items: center;
   width: 50%;
-  margin: auto auto; /* Center the content */
+  margin: auto auto;
 }
 
 .landing-intro {
   flex: 1;
-  padding-right: 20px; /* Add spacing between "Take Control" and the image */
+  padding-right: 20px;
 }
 
 .landing-intro img {
-  width: 90%; /* Set maximum width for the image */
-  height: auto; /* Ensure aspect ratio is maintained */
+  width: 90%;
+  height: auto;
   border-radius: 20px;
 }
 
 .landing-register-top-container {
   display: flex;
-  flex-direction: column; /* Align children vertically */
+  flex-direction: column;
   margin-left: 70px;
   max-width: 400px;
   margin: 0 auto;
@@ -39,11 +39,11 @@
 .landing-signup {
   display: flex;
   justify-content: flex-end;
-  align-items: flex-end; /* Align items to the end of the container */
+  align-items: flex-end;
   margin-top: 20px;
 }
 
 .landing-signin i,
 .landing-signup i {
-  margin-top: 10px; /* Add spacing between "Sign In" and "Sign Up" icons */
+  margin-top: 10px;
 }

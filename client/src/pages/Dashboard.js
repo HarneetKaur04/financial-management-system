@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Expense from '../components/Transactions/Expense';
 import Income from '../components/Transactions/Income';
@@ -39,31 +39,25 @@ function Dashboard() {
   const [isFullReportOpen, setIsFullReportOpen] = useState(false);
   const [isSourcesFullReportOpen, setIsSourcesFullReportOpen] = useState(false);
 
-  useEffect(() => {
-    if (currentUser) {
-      fetchTransactions();
-      fetchGoals();
+  const fetchTransactions = useCallback(async () => {
+    try {
+      const response = await fetch(`http://localhost:7000/api/transactions/${currentUser.uid}`);
+      const data = await response.json();
+      setAllTransactions(data.allTransactions);
+      setTotalIncome(data.totalIncome);
+      setTotalExpense(data.totalExpense);
+      setIncomeSources(data.incomeSources);
+      setExpenseSources(data.expenseSources);
+      setTotalSavings(data.totalSavings);
+      setSavingsToGoalsResult(data.savingsToGoalsResult);
+      setAllocatedSavings(data.allocatedSavings);
+      setSavingsRateData(data.savingsRates);
+    } catch (error) {
+      console.error('Error fetching income data:', error);
     }
-  }, [currentUser, isModalOpen, isSavingsModalOpen]);
+  }, [currentUser]);
 
-  const fetchTransactions = async () => {
-    fetch(`http://localhost:7000/api/transactions/${currentUser.uid}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setAllTransactions(data.allTransactions);
-        setTotalIncome(data.totalIncome);
-        setTotalExpense(data.totalExpense);
-        setIncomeSources(data.incomeSources);
-        setExpenseSources(data.expenseSources);
-        setTotalSavings(data.totalSavings);
-        setSavingsToGoalsResult(data.savingsToGoalsResult);
-        setAllocatedSavings(data.allocatedSavings);
-        setSavingsRateData(data.savingsRates);
-      })
-      .catch((error) => console.error('Error fetching income data:', error));
-  };
-
-  const fetchGoals = async () => {
+  const fetchGoals = useCallback(async () => {
     try {
       const response = await fetch(`http://localhost:7000/api/financial-goals/${currentUser.uid}`);
       const data = await response.json();
@@ -72,7 +66,14 @@ function Dashboard() {
     } catch (error) {
       console.error("Error fetching goals:", error);
     }
-  };
+  }, [currentUser]);
+
+  useEffect(() => {
+    if (currentUser) {
+      fetchGoals();
+      fetchTransactions();
+    }
+  }, [currentUser, isModalOpen, isSavingsModalOpen, fetchTransactions, fetchGoals]);
 
   const handleUpdateTransaction = async (updatedTransaction) => {
     try {
@@ -193,10 +194,10 @@ function Dashboard() {
       });
   
       if (response.ok) {
-        fetchGoals();
         setIsSavingsModalOpen(false);
         setSelectedGoal();
         setMessage("");
+        window.location.reload();
       } else {
         setMessage('Failed to update goal');
       }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import AuthContext from "../AuthContext";
 import "./FinancialGoals.css"; // Import CSS file
 import { useNavigate } from "react-router-dom";
@@ -54,7 +54,7 @@ function FinancialGoals() {
     }
   };
 
-  const fetchGoals = async () => {
+  const fetchGoals = useCallback(async () => {
     try {
       const response = await fetch(`http://localhost:7000/api/financial-goals/${currentUser.uid}`);
       const data = await response.json();
@@ -63,7 +63,7 @@ function FinancialGoals() {
     } catch (error) {
       console.error("Error fetching goals:", error);
     }
-  };
+  }, [currentUser]);
 
   const handleSelectGoal = (goal) => {
     setSelectedGoal(goal);
@@ -166,7 +166,7 @@ function FinancialGoals() {
 
   useEffect(() => {
     fetchGoals();
-  }, [currentUser]);
+  }, [currentUser, fetchGoals]);
 
   if (!currentUser) {
     navigate("/")

@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
 import 'chartjs-plugin-datalabels';
 
-const IncomeExpenseSource = ({ type, categories, handleSourcesReport, onButtonClick}) => {
+const IncomeExpenseSource = ({ type, categories, onButtonClick }) => {
   const chartRef = useRef(null);
   const chartInstance = useRef(null);
 
@@ -48,8 +48,8 @@ const IncomeExpenseSource = ({ type, categories, handleSourcesReport, onButtonCl
               callbacks: {
                 label: function(context) {
                   const label = context.label || '';
-                  const value = typeof context.raw === 'number' ? context.raw : 0;
-                  return label + ': $' + (parseFloat(value).toFixed(2));
+                  const value = parseFloat(context.raw || 0).toFixed(2);
+                  return label + ': $' + value;
                 }
               }
             },
@@ -74,8 +74,14 @@ const IncomeExpenseSource = ({ type, categories, handleSourcesReport, onButtonCl
   return (
     <div className='stats'>
       <h2>{type === 'income' ? 'Income Sources' : 'Spending Habits'}</h2>
-      <canvas className={type === 'income' ? "chart-canvas" : "chart-canvas-pie"} ref={chartRef}></canvas>
-      <button onClick={() => onButtonClick(type)}>See Full Report</button>
+      {categories.length > 0 ? (
+        <>
+          <canvas className={type === 'income' ? "chart-canvas" : "chart-canvas-pie"} ref={chartRef}></canvas>
+          <button onClick={() => onButtonClick(type)}>See Full Report</button>
+        </>
+      ) : (
+        <p>{type === 'income' ? "Add Incomes!" : "Add Expenses!"}</p>
+      )}
     </div>
   );
 };

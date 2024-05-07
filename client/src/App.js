@@ -6,6 +6,7 @@ import NavBar from './components/NavBar/NavBar';
 import { AuthProvider } from './AuthContext'; // Import AuthProvider
 import HowItWorks from './pages/HowItWorks';
 import FinancialGoals from './pages/FinancialGoals';
+import Footer from './components/Footer/Footer';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path='/how-it-works' element={<HowItWorks />} />
             <Route path='/financial-goals' element={<FinancialGoals />} />
           </Routes>
+          <Footer />
         </div>
       </AuthProvider>
     </Router>
