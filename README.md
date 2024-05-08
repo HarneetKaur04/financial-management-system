@@ -5,8 +5,7 @@
 <br/>
 Full Demo Video Link: <a href="">Live Webpage Recording</a>
 
-Test user you can use:   password: 
-
+Test user you can use to sign in: test@finance.com , password: finance
 
 ## Contents
 - [Overview](#overview)
@@ -130,7 +129,7 @@ Many-to-One relationship with:
 - Financial Goals Table: Many allocations can be made towards one financial goal.
 
 ### Data:
-
+PG dump is created for users and transactions table. I have added 2 users and few transactions setting the incomes and expenses for each user. Web application will populate with sample data. I have not created dump for financial_goals, savings_allocation as it would conflict with the goal_id set by postgreSQL when setting the goals for users. Log in/sign-up for an account and you can easily add new income/expense transactions, add goals, allocate savings. Web application is easy to navigate
 ## Routes
 This Express application features routes for managing users, transactions, and financial goals. Users can sign up, income/expense transactions can be viewed, added, updated, or deleted, and financial goals can be viewed, created, updated, or removed, providing comprehensive financial management functionality to help manage financial and keep track of your financial health.
 ### Users Routes:

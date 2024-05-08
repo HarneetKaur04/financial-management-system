@@ -22,8 +22,8 @@ CREATE TABLE IF NOT EXISTS public.users (
 
 -- -- Data for users table
 COPY public.users (user_id, email) FROM stdin with delimiter ',';
-qQcrFEVOyBh5CABK7DflvvwpXpn1,user1@finance.com
-03m12UHc8bRIb5OF52H69lnSPzi2,harneet@finance.com
+KaT3Euuc5xaoSZZwgtWMZhEcxG63,test@finance.com
+9p5IKUPw7iOyfAzqJgVvaYwqV6y1,test2@finance.com
 \.
 
 -- Transactions Table
@@ -36,6 +36,34 @@ CREATE TABLE IF NOT EXISTS public.transactions (
   name VARCHAR(255),
   amount DECIMAL(15, 2)
 );
+
+COPY public.transactions (user_id, date, type, category, name, amount) FROM stdin WITH DELIMITER ',';
+KaT3Euuc5xaoSZZwgtWMZhEcxG63,2024-05-01 00:00:00,income,salary,May Salary,2300.00
+KaT3Euuc5xaoSZZwgtWMZhEcxG63,2024-05-07 00:00:00,income,investment,Dividend received,23.00
+KaT3Euuc5xaoSZZwgtWMZhEcxG63,2024-05-15 00:00:00,income,freelance,website design work,540.00
+KaT3Euuc5xaoSZZwgtWMZhEcxG63,2024-06-01 00:00:00,income,salary,June Salary,2300.00
+KaT3Euuc5xaoSZZwgtWMZhEcxG63,2024-06-03 00:00:00,income,others,side hustle,50.00
+KaT3Euuc5xaoSZZwgtWMZhEcxG63,2024-05-15 00:00:00,income,rental,rent from apartment,1200.00
+KaT3Euuc5xaoSZZwgtWMZhEcxG63,2024-05-09 00:00:00,expense,food,groceries,130.00
+KaT3Euuc5xaoSZZwgtWMZhEcxG63,2024-05-16 00:00:00,expense,entertainment,Dinner in a restaurant,65.00
+KaT3Euuc5xaoSZZwgtWMZhEcxG63,2024-05-20 00:00:00,expense,food,milk and eggs,23.00
+KaT3Euuc5xaoSZZwgtWMZhEcxG63,2024-05-29 00:00:00,expense,shopping,shopping,80.00
+KaT3Euuc5xaoSZZwgtWMZhEcxG63,2024-05-10 00:00:00,expense,car,Petrol,70.00
+KaT3Euuc5xaoSZZwgtWMZhEcxG63,2024-06-03 00:00:00,expense,car,petrol,75.00
+KaT3Euuc5xaoSZZwgtWMZhEcxG63,2024-05-17 00:00:00,expense,education,tuition fees,250.00
+KaT3Euuc5xaoSZZwgtWMZhEcxG63,2024-06-14 00:00:00,expense,education,tuition june,250.00
+KaT3Euuc5xaoSZZwgtWMZhEcxG63,2024-05-17 00:00:00,expense,rent,Rent paid May,1700.00
+KaT3Euuc5xaoSZZwgtWMZhEcxG63,2024-06-14 00:00:00,expense,rent,Rent paid June,1700.00
+KaT3Euuc5xaoSZZwgtWMZhEcxG63,2024-06-13 00:00:00,income,rental,rent from apartment,1200.00
+9p5IKUPw7iOyfAzqJgVvaYwqV6y1,2024-06-01 00:00:00,income,salary,June Salary,1200.00
+9p5IKUPw7iOyfAzqJgVvaYwqV6y1,2024-06-15 00:00:00,income,salary,June salary,1200.00
+9p5IKUPw7iOyfAzqJgVvaYwqV6y1,2024-06-13 00:00:00,income,others,Side work,250.00
+9p5IKUPw7iOyfAzqJgVvaYwqV6y1,2024-06-14 00:00:00,income,rental,rental income,1250.00
+9p5IKUPw7iOyfAzqJgVvaYwqV6y1,2024-06-14 00:00:00,expense,food,groceries,250.00
+9p5IKUPw7iOyfAzqJgVvaYwqV6y1,2024-06-27 00:00:00,expense,food,groceries,125.00
+9p5IKUPw7iOyfAzqJgVvaYwqV6y1,2024-06-14 00:00:00,expense,grooming,nail art,50.00
+9p5IKUPw7iOyfAzqJgVvaYwqV6y1,2024-06-15 00:00:00,expense,rent,rent June,900.00
+\.
 
 -- Financial Goals Table
 CREATE TABLE IF NOT EXISTS public.financial_goals (

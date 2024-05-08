@@ -109,6 +109,11 @@
   height: fit-content;
 }
 
+.modal-content {
+  max-height: 80vh;
+  overflow-y: auto; /* Enable vertical scrollbar when content exceeds the height */
+}
+
 .modal.open {
   opacity: 1;
   pointer-events: auto;
