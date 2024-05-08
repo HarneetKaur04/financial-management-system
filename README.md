@@ -1,9 +1,9 @@
 <p align="center">FINANCIAL MANAGEMENT SYSTEM<p/>
 <p align="center">
-  <img src="/client/public/assets/" alt="Finance Management System">
+  <img src="/client/public/assets/overview_gif.gif" alt="Finance Management System">
 </p>
 <br/>
-Full Demo Video Link: <a href="">Live Webpage Recording</a>
+Full Demo Video Link: <a href="/client/public/assets/Full_video.mp4">Live Webpage Recording</a>
 
 Test user you can use to sign in: test@finance.com , password: finance
 
@@ -17,7 +17,7 @@ Test user you can use to sign in: test@finance.com , password: finance
 - [Future Development](#future-development)
 
 ## Overview
-The application facilitates user registration, login, user authentication, and session management, transaction management (income, expense, saving), financial goal setting and management, and provides insights and reports on financial activities.
+The application facilitates user registration, login, user authentication, and session management, transaction management (income, expense, saving), financial goal setting and management, and provides insights and reports on all financial activities.
 
 ### Key Components:
 #### User Registration, Login, Authentication and Sessions Management:
@@ -129,7 +129,7 @@ Many-to-One relationship with:
 - Financial Goals Table: Many allocations can be made towards one financial goal.
 
 ### Data:
-PG dump is created for users and transactions table. I have added 2 users and few transactions setting the incomes and expenses for each user. Web application will populate with sample data. I have not created dump for financial_goals, savings_allocation as it would conflict with the goal_id set by postgreSQL when setting the goals for users. Log in/sign-up for an account and you can easily add new income/expense transactions, add goals, allocate savings. Web application is easy to navigate
+PG dump is created for users and transactions table. I have added 2 users and few transactions setting the incomes and expenses for each user. Web application will populate with sample data. I have not created dump for financial_goals, savings_allocation as it would conflict with the goal_id set by postgreSQL when setting the goals for users. Log in/sign-up for an account and you can easily add new income/expense transactions, add goals, allocate savings. Web application is easy to navigate.
 ## Routes
 This Express application features routes for managing users, transactions, and financial goals. Users can sign up, income/expense transactions can be viewed, added, updated, or deleted, and financial goals can be viewed, created, updated, or removed, providing comprehensive financial management functionality to help manage financial and keep track of your financial health.
 ### Users Routes:
@@ -137,7 +137,7 @@ This Express application features routes for managing users, transactions, and f
 Firebase offers secure authentication mechanisms, including built-in OAuth providers like Google, which ensures the security of user data.
 ### Transactions Routes:
 - GET /api/transactions/:userId: Retrieves transaction details for a specific user from the database. Calculates and returns transaction details including total income, total expense, income sources, expense sources, total savings, allocated savings, all transactions, savings to goals allocation, and savings rates.
-- POST /api/transactions/:type: Adds a new income or expense transaction for a specific user.
+- POST /api/transactions/:type: Adds a new income or expense type transaction for a specific user.
 - PUT /api/transactions/:userId/:transactionId: Updates a specific transaction for a user by its ID.
 - DELETE /api/transactions/:userId/:transactionId: Deletes a specific transaction for a user by its ID.
 ### Financial Goals Routes:
