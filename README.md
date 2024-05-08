@@ -27,7 +27,7 @@ User Session: Firebase Authentication use JSON Web Tokens (JWTs) for authenticat
 User has a dashboard which is categorized and provides insights and reports of Income, Expenses, Savings, Income Sources, Spending Habits, Savings Rate, All Transactions, Financial Goals etc. 
 Users can manage these transactions. User can view/add income or expense transaction/edit these transactions/delete these transactions. Savings are calculated automatically.
 Transaction details such as total income, total expense, income sources, expense sources, total savings, and allocated savings are calculated and returned to the user and displayed on dashboard. See full report button will show all the related transactions to provide details to the user.
-### Sorting and Retriving:
+#### Sorting and Retriving:
 User can see all the transactions at the end of the page. User has a search bar which retrieves transactions as per user input for type, category, date, amount. 
 User also has an option to sort the transactions by Date, Amount (Highest to Lowest), Amount (lowest to highest), transaction type (default is expense) which provides convenience to the user.
 #### Financial Goals:
@@ -69,7 +69,7 @@ Insights and reports on spending habits, income sources, savings rate, and progr
 - chart.js: Library for creating interactive charts and graphs on web pages.
 - chartjs-adapter-date-fns: Adapter for using date-fns with Chart.js.
 - chartjs-plugin-datalabels: Plugin for displaying data labels on charts.
-- firebase: Development platform for building web and mobile applications.
+- firebase: Development platform for building web and mobile applications. Used it for user authentication and registerion.
 - react: Library for building user interfaces. Used for Firebase service: authentication.
 - react-chartjs-2: React wrapper for Chart.js.
 - react-dom: React package for working with the DOM.
@@ -84,18 +84,18 @@ Insights and reports on spending habits, income sources, savings rate, and progr
 ## Database Set Up
 ### Tables:
 #### Users Table:
-Purpose: Stores information about users registered in the system.
-Columns:
+##### Purpose: Stores information about users registered in the system.
+##### Columns:
 - user_id: Unique identifier for each user.
 - email: Email address of the user, which must be unique.
 - created_at: Timestamp indicating when the user account was created.
-One-to-Many relationship with:
+##### One-to-Many relationship with:
 - Transactions Table: One user can have many transactions.
 - Financial Goals Table: One user can have many financial goals.
 - Savings Allocation Table: One user can have many savings allocations.
 #### Transactions Table:
-Purpose: Stores records of financial transactions made by users.
-Columns:
+##### Purpose: Stores records of financial transactions made by users.
+##### Columns:
 - transaction_id: Unique identifier for each transaction, automatically generated.
 - user_id: Foreign key referencing the user_id in the Users table, indicating which user made the transaction.
 - date: Timestamp indicating when the transaction occurred.
@@ -103,28 +103,28 @@ Columns:
 - category: Category of the transaction.
 - name: Name or description of the transaction.
 - amount: Amount of the transaction.
-Many-to-One relationship with:
+##### Many-to-One relationship with:
 - Users Table: Many transactions can belong to one user.
 #### Financial Goals Table:
-Purpose: Stores information about financial goals set by users.
-Columns:
+##### Purpose: Stores information about financial goals set by users.
+##### Columns:
 - goal_id: Unique identifier for each financial goal, automatically generated.
 - user_id: Foreign key referencing the user_id in the Users table, indicating which user set the goal.
 - goal_name: Name or description of the financial goal.
 - target_amount: The total amount targeted to be saved for the goal.
 - current_amount_saved: The current amount saved towards achieving the goal.
 - completion_status: Indicates whether the goal has been completed or not.
-Many-to-One relationship with:
+##### Many-to-One relationship with:
 - Users Table: Many financial goals can belong to one user.
 #### Savings Allocation Table:
-Purpose: Tracks the allocation of savings towards specific financial goals.
-Columns:
+##### Purpose: Tracks the allocation of savings towards specific financial goals.
+##### Columns:
 - allocation_id: Unique identifier for each allocation, automatically generated.
 - user_id: Foreign key referencing the user_id in the Users table, indicating which user made the allocation.
 - goal_id: Foreign key referencing the goal_id in the Financial Goals table, indicating the goal for which the allocation is made.
 - amount_allocated: Amount allocated towards the specified financial goal.
 - date_allocated: Timestamp indicating when the allocation was made.
-Many-to-One relationship with:
+##### Many-to-One relationship with:
 - Users Table: Many allocations can belong to one user.
 - Financial Goals Table: Many allocations can be made towards one financial goal.
 
