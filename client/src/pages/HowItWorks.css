@@ -1,0 +1,12 @@
+.video-player {
+  display: block;
+  margin: 0 auto;
+  height: auto;
+  width: 50%;
+  margin-bottom: 10%;
+}
+
+.top-container-how-it-works h2 {
+  text-align: center;
+}
+  
