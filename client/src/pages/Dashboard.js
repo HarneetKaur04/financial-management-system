@@ -6,7 +6,7 @@ import AddTransactionModal from '../components/Transactions/AddTransactionModal'
 import Savings from '../components/Savings/Savings';
 import SavingsRate from '../components/Savings/SavingsRate';
 import IncomeExpenseSource from '../components/Transactions/IncomeExpenseSource';
-import AuthContext from '../AuthContext';
+import AuthContext from '../AuthContext'; // used to check if user is signed in
 import AllTransactions from '../components/Transactions/AllTransactions';
 import EditTransactionModal from '../components/Transactions/EditTransactionModal';
 import './Dashboard.css'; // Import CSS file for custom styles

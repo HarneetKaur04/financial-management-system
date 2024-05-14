@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, useCallback } from "react";
-import AuthContext from "../AuthContext";
+import AuthContext from "../AuthContext"; // used to check if user is signed in
 import "./FinancialGoals.css"; // Import CSS file
 import { useNavigate } from "react-router-dom";
 import AchievedGoal from "../components/Goals/AchievedGoal";

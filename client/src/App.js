@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
 import LandingPage from './pages/LandingPage';
 import NavBar from './components/NavBar/NavBar';
-import { AuthProvider } from './AuthContext'; // Import AuthProvider
+import { AuthProvider } from './AuthContext'; // Import AuthProvider: used to check if user is signed in
 import HowItWorks from './pages/HowItWorks';
 import FinancialGoals from './pages/FinancialGoals';
 import Footer from './components/Footer/Footer';

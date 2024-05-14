@@ -147,7 +147,7 @@ Firebase offers secure authentication mechanisms, including built-in OAuth provi
 - DELETE /api/financial-goals/:userId/:goalId: Deletes a specific financial goal for a user.
 
 ## Tests
-The test suite includes tests for multiple components. There are currently 4 test suites and 9 tests. These tests cover various aspects of the application, including rendering, and user interaction.
+The test suite includes tests for multiple components. There are currently 4 test suites and 9 tests. These tests cover various aspects of the application, including rendering, and user interaction. Run cmd `npm test` under client
 ### AllTransactions component Test:
 - Verifies that the number of rendered transaction rows matches the length of the mock transactions array plus one for the table header row.
 - Simulates a change in the search input field to filter transactions by a specific term. Verifies that only the transactions matching the search term are displayed.
